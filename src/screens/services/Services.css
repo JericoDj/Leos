@@ -1,0 +1,55 @@
+.services-section {
+    margin-bottom: 40px;
+    padding: 30px; /* Increased padding for a more spacious layout */
+    background-color: #f9f9f9; /* Soft, premium background color */
+    border-radius: 12px; /* Slightly rounded corners for a modern look */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Premium, subtle shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effects */
+  }
+  
+  .services-section:hover {
+    transform: translateY(-5px); /* Slight upward movement on hover */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+  }
+  
+  .services-section h2 {
+    margin-top: 0;
+    font-size: 2rem; /* Larger, more premium font size */
+    font-weight: 600; /* Semi-bold for better emphasis */
+    color: #2a2a2a; /* Richer text color for better contrast */
+    margin-bottom: 15px; /* Space below heading */
+    text-align: center; /* Center the heading for balance */
+  }
+  
+  .services-section p {
+    font-size: 1.1rem; /* Slightly larger font for readability */
+    color: #4a4a4a; /* Dark gray for elegant contrast */
+    line-height: 1.8; /* Improved line spacing for premium readability */
+    text-align: center; /* Center align text for a cohesive look */
+    margin-bottom: 20px;
+  }
+  
+  .services-section ul {
+    list-style-type: none; /* Remove default bullets for a cleaner look */
+    padding: 0;
+    margin: 0 auto; /* Center the list */
+    max-width: 600px; /* Limit width for better balance */
+  }
+  
+  .services-section li {
+    margin-bottom: 15px;
+    font-size: 1rem; /* Consistent text size */
+    color: #333333; /* Darker color for better readability */
+    background: #ffffff; /* White background for list items */
+    padding: 10px 15px; /* Add padding to list items */
+    border-radius: 8px; /* Slightly rounded corners for list items */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for list items */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hover effect for list items */
+  }
+  
+  .services-section li:hover {
+    transform: translateY(-3px); /* Slight upward movement */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+  }
+  
+  
