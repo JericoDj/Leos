@@ -68,7 +68,7 @@
     background-color: #444444; /* Dark gray button */
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
@@ -85,7 +85,7 @@
     background-color: transparent;
     color: #444444; /* Dark gray text */
     border: 1px solid #444444;
-    border-radius: 5px;
+    border-radius: 10px;
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;

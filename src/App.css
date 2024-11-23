@@ -90,10 +90,10 @@ body, html {
 }
 
 .contact-button {
-  background-color: #bbbbbb; /* Slightly darker neutral grey */
-  color: #333333; /* Dark grey text */
+  background-color: #999999; /* Slightly darker neutral grey */
+  color: #ffffff; /* Dark grey text */
   padding: 10px 20px; /* Increased padding for a prominent button */
-  border-radius: 5px;
+  border-radius: 10px;
   font-weight: bold;
   border: none;
   text-decoration: none;
@@ -101,7 +101,7 @@ body, html {
 }
 
 .contact-button:hover {
-  background-color: #999999; /* Darker grey on hover */
+  background-color: #6f6e6e; /* Darker grey on hover */
   color: #ffffff; /* White text on hover */
   transform: scale(1.05); /* Subtle scaling effect on hover */
 }
@@ -151,4 +151,11 @@ body, html {
   margin-top: 20px;
   font-size: 0.9rem;
   color: #aaaaaa; /* Subtle grey for copyright text */
+}
+
+.logo-image {
+  height: 100px; /* Set a fixed height */
+  width: auto;  /* Maintain the aspect ratio */
+  max-width: 100%; /* Ensure it doesn't exceed the container */
+  object-fit: contain; /* Ensures proper fitting */
 }

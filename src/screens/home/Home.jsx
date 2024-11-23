@@ -6,12 +6,13 @@ function Home() {
       <div className="home-container">
         {/* Left Column */}
         <div className="home-text">
-          <p className="home-badge">THIS IS A BADGE</p>
-          <h1 className="home-title">Unblock your team, boost your time to production</h1>
-          <p className="home-subtitle">Subtitle goes here</p>
+          <p className="home-badge">Empowering Businesses, One App at a Time</p>
+          <h1 className="home-title">Welcome to Leos</h1>
+          <p className="home-subtitle"> Leos is a hub of innovation, offering advanced development and technology solutions
+          to empower your projects. Explore our cutting-edge products and comprehensive services tailored to your needs.</p>
           <div className="home-buttons">
-            <button className="btn-primary">Get Started</button>
-            <button className="btn-secondary">See Tutorials →</button>
+            <button className="btn-primary">Inquire Service</button>
+            <button className="btn-secondary">Check Out Products →</button>
           </div>
         </div>
 

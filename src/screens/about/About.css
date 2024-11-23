@@ -1,18 +1,136 @@
+/* General Section Styling */
 .about-section {
-    margin-bottom: 40px;
-    padding: 20px;
-    background-color: #859297;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .about-section h2 {
-    margin-top: 0;
-    color: #282c34;
-  }
-  
-  .about-section p {
-    color: #555;
-    line-height: 1.6;
-  }
-  
+  padding: 60px 20px;
+  background: linear-gradient(180deg, #f4f4f4, #ebebeb);
+  text-align: center;
+}
+
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Title and Description */
+.about-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #222222;
+  margin-bottom: 20px;
+}
+
+.about-description {
+  font-size: 1.2rem;
+  color: #555555;
+  margin-bottom: 40px;
+}
+
+/* Values Section */
+.about-values {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.value-card {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  flex: 1;
+  min-width: 250px;
+  max-width: 300px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.value-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+}
+
+.value-card.active {
+  background: #f9f9f9;
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+}
+
+.value-card h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #222222;
+  margin: 15px 0;
+}
+
+.value-card p {
+  font-size: 1rem;
+  color: #666666;
+}
+
+/* Icons */
+.icon {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+.lightbulb {
+  color: #f39c12;
+}
+
+.check-circle {
+  color: #27ae60;
+}
+
+.handshake {
+  color: #2980b9;
+}
+
+/* Tooltip on Hover */
+.icon[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  background: #333333;
+  color: #ffffff;
+  font-size: 0.8rem;
+  padding: 5px 10px;
+  border-radius: 4px;
+  top: -35px;
+  white-space: nowrap;
+  z-index: 1000;
+}
+
+/* Expanded Content */
+.extra-content {
+  margin-top: 15px;
+  font-size: 0.9rem;
+  color: #444444;
+}
+
+/* Call to Action */
+.about-cta {
+  margin-top: 40px;
+}
+
+.about-cta p {
+  font-size: 1.2rem;
+  color: #444444;
+  margin-bottom: 15px;
+}
+
+.btn-primary {
+  padding: 12px 25px;
+  background: #444444;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: #222222;
+  transform: translateY(-2px);
+}
