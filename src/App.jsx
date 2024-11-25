@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import  { useEffect } from "react";
 import "./App.css";
 import Home from "./screens/home/Home";
 import About from "./screens/about/About";

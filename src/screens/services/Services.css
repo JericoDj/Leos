@@ -1,7 +1,7 @@
-/* Services Section */
+/* General Section Styling */
 .services-section {
   padding: 60px 20px;
-  background: #f9f9f9;
+  background: linear-gradient(180deg, #ebebeb, #f4f4f4);
   text-align: center;
 }
 
@@ -10,80 +10,127 @@
   margin: 0 auto;
 }
 
+/* Title and Description */
 .services-title {
   font-size: 2.5rem;
   font-weight: bold;
   color: #222222;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .services-description {
   font-size: 1.2rem;
   color: #555555;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
+  line-height: 1.6;
 }
 
-/* Grid Layout */
+/* Services Grid */
 .services-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
 }
 
-/* Service Cards */
 .service-card {
   background: #ffffff;
   border-radius: 8px;
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  text-align: left;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.service-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
-}
-
-.service-card h3 {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #222222;
-  margin-bottom: 15px;
-}
-
-.service-card p {
-  font-size: 1rem;
-  color: #666666;
-  margin-bottom: 15px;
-}
-
-.service-card ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.service-card li {
-  font-size: 1rem;
-  color: #444444;
-  margin-bottom: 10px;
-  padding-left: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: box-shadow 0.3s ease;
   position: relative;
 }
 
-.service-card li::before {
-  content: "✔";
-  color: #27ae60;
-  font-weight: bold;
-  position: absolute;
-  left: 0;
+.service-card:hover {
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* Service Image */
-.service-image {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
+.service-icon {
+  font-size: 2rem;
+  color: #444444;
   margin-bottom: 15px;
+}
+
+/* Examples Grid */
+.examples-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  gap: 20px; /* Proper spacing between items */
+  margin-top: 20px;
+}
+
+.example-item {
+  width: 100%;
+  height: 200px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  text-align: center;
+  perspective: 1000px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.example-item:hover {
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.example-front,
+.example-back {
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  box-shadow: inherit;
+}
+
+.example-front {
+  background: #ffffff;
+}
+
+.example-back {
+  background: #444444;
+  color: #ffffff;
+  transform: rotateY(180deg);
+}
+
+.example-item.flipped .example-front {
+  transform: rotateY(180deg);
+}
+
+.example-item.flipped .example-back {
+  transform: rotateY(180);
+}
+
+/* Prevent Overlap */
+.examples-grid {
+  overflow: hidden; /* Prevent elements from overflowing */
+}
+
+.service-card {
+  margin-bottom: 40px; /* Ensure enough space between the service card and examples */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .examples-grid {
+    grid-template-columns: repeat(2, 1fr); /* Adjust to two columns for smaller screens */
+  }
+
+  .example-item {
+    height: 180px;
+  }
 }

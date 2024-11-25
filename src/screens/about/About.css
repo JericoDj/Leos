@@ -67,44 +67,31 @@
   color: #666666;
 }
 
-/* Icons */
-.icon {
-  font-size: 2.5rem;
+/* Custom Backgrounds */
+.value-image {
+  width: 100%;
+  height: 150px;
+  border-radius: 8px;
   margin-bottom: 15px;
+  background-size: cover;
+  background-position: center;
 }
 
-.lightbulb {
-  color: #f39c12;
+/* Innovation Background */
+.innovation-image {
+  background-image: url('../../assets/Innovate.jpg'); /* Corrected path */
 }
 
-.check-circle {
-  color: #27ae60;
+/* Quality Background */
+.quality-image {
+  background-image: url('../../assets/Quality.jpg'); /* Corrected path */
 }
 
-.handshake {
-  color: #2980b9;
+/* Relationships Background */
+.relationships-image {
+  background-image: url('../../assets/Relationship.jpg'); /* Corrected path */
 }
 
-/* Tooltip on Hover */
-.icon[title]:hover::after {
-  content: attr(title);
-  position: absolute;
-  background: #333333;
-  color: #ffffff;
-  font-size: 0.8rem;
-  padding: 5px 10px;
-  border-radius: 4px;
-  top: -35px;
-  white-space: nowrap;
-  z-index: 1000;
-}
-
-/* Expanded Content */
-.extra-content {
-  margin-top: 15px;
-  font-size: 0.9rem;
-  color: #444444;
-}
 
 /* Call to Action */
 .about-cta {
