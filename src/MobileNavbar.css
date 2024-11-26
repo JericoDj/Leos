@@ -1,0 +1,100 @@
+/* Mobile Navbar */
+.mobile-navbar {
+  display: grid;
+  grid-template-columns: auto 1fr auto; /* Three equal sections: Left (Menu), Center (Logo), Right (Contact) */
+  align-items: center;
+  background-color: #ffffff;
+  padding: 10px 15px; /* Consistent padding */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  height: 60px;
+}
+
+/* Drawer Button */
+.drawer-button {
+  margin-right: 30px;
+  background: none;
+  margin-bottom: 10px;
+  font-size: 20px; /* Larger icon size for visibility */
+  color: #747474;
+  border: none;
+  cursor: pointer;
+}
+
+/* Logo Container */
+.mobile-logo-container {
+  display: flex;
+  justify-content: center;
+}
+
+.mobile-logo-image {
+  height: 80px; /* Adjust height for a clean look */
+  width: 100px;
+}
+
+/* Contact Button */
+.mobile-contact-button {
+  background-color: #444444;
+  color: #ffffff;
+  margin-right: 30px;
+  padding: 8px 15px; /* Padding for clickable area */
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-align: center;
+}
+
+.mobile-contact-button:hover {
+  color: #ffffff;
+  background-color: #222222;
+}
+
+/* Drawer Menu */
+.mobile-drawer {
+  position: fixed;
+  top: 60px; /* Below the navbar */
+  left: 0;
+  width: 100%; /* Full-width for mobile menu */
+  background-color: #ffffff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+  padding: 20px 0; /* Padding around the menu */
+}
+
+.mobile-drawer-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: center; /* Center-align menu items */
+}
+
+.mobile-drawer-menu li {
+  margin: 20px 0; /* Spacing between menu items */
+}
+
+.mobile-drawer-menu a {
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 15px; /* Padding for clickable area */
+  transition: color 0.3s ease, background-color 0.3s ease;
+  background-color: transparent; /* Ensure no background color */
+}
+
+.mobile-drawer-menu a:hover {
+  background-color: transparent; /* No hover background */
+  border-radius: 10px;
+  color: #444444; /* Change text color only */
+}
+
+.mobile-drawer-menu a:active {
+  background-color: transparent; /* No click background */
+  color: #222222; /* Optional darker text color */
+}

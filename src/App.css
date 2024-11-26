@@ -1,3 +1,4 @@
+
 /* General Reset */
 body, html {
   margin: 0;
@@ -108,50 +109,87 @@ body, html {
 
 /* Footer Styling */
 .footer {
-  background-color: #333333; /* Dark background for footer */
+  background-color: #333333; /* Dark background */
   color: #ffffff; /* White text */
-  padding: 50px 20px; /* Balanced spacing */
-  text-align: center;
-  margin-top: 40px;
-  overflow-x: hidden; /* Prevent horizontal scrolling in footer */
+  padding: 40px 20px; /* Balanced spacing */
+  text-align: center; /* Center-align text for smaller screens */
+  margin-top: 40px; /* Add spacing above the footer */
+  box-sizing: border-box;
 }
 
+/* Footer Logo Styling */
+.footer-logo .logo-image {
+  height: 100px; /* Increase the height of the logo */
+  width: auto; /* Maintain aspect ratio */
+  max-width: 200px; /* Optional: Restrict the max width for responsiveness */
+  object-fit: contain; /* Ensures the logo fits properly */
+  margin: 0 auto; /* Center the logo if needed */
+}
+
+
+/* Footer Container */
 .footer-container {
   max-width: 1200px;
   margin: 0 auto; /* Center the content */
   display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.footer-logo h2 {
-  font-size: 1.8rem; /* Large footer logo */
-  margin-bottom: 20px; /* Space below logo */
-}
-
-.footer-links {
-  display: flex;
-  gap: 15px; /* Space between links */
   flex-wrap: wrap; /* Allow wrapping for smaller screens */
-  margin-bottom: 20px; /* Space below links */
+  justify-content: center; /* Center content */
+  align-items: center; /* Align items vertically */
+  gap: 20px; /* Add space between elements */
 }
 
-.footer-link {
-  color: #bbbbbb; /* Neutral grey for links */
+/* Footer Logo */
+.footer-logo {
+  margin-bottom: 20px; /* Add spacing below logo */
+}
+
+.footer-logo img {
+  height: 50px;
+  width: auto;
+}
+
+/* Footer Contact */
+.footer-contact {
+  font-size: 14px;
+  text-align: center; /* Center-align contact details */
+  color: #ffffff;
+}
+
+.footer-contact p {
+  margin: 5px 0; /* Adjust spacing for contact text */
+}
+
+.footer-email {
+  color: #007bff; /* Add link color for email */
   text-decoration: none;
   font-weight: bold;
   transition: color 0.3s ease;
 }
 
-.footer-link:hover {
-  color: #ffffff; /* White text on hover */
+.footer-email:hover {
+  color: #0056b3; /* Darker blue on hover */
 }
 
-.footer p {
-  margin-top: 20px;
-  font-size: 0.9rem;
-  color: #aaaaaa; /* Subtle grey for copyright text */
+.footer-phone {
+  font-weight: bold;
+  color: #ffffff;
 }
+
+/* Footer Copyright */
+.footer-copyright {
+  margin-top: 20px;
+  font-size: 12px;
+  color: #aaaaaa;
+}
+
+/* Responsive Footer */
+@media screen and (max-width: 768px) {
+  .footer-container {
+    flex-direction: column; /* Stack sections vertically */
+    text-align: center; /* Center-align text on smaller screens */
+  }
+}
+
 
 .logo-image {
   height: 100px; /* Set a fixed height */

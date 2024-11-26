@@ -1,20 +1,20 @@
 /* Home Section */
 .home-section {
   display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
+  justify-content: center;
+  align-items: center;
   width: 100vw; /* Full screen width */
   height: calc(100vh - 70px); /* Full height minus navbar */
   background: linear-gradient(180deg, #f4f4f4, #ebebeb); /* Subtle gradient */
-  padding: 0; /* Remove padding */
-  margin: 0; /* No margin */
+  padding: 0;
+  margin: 0;
   box-sizing: border-box;
 }
 
 /* Container for Columns */
 .home-container {
   display: flex;
-  flex-direction: row; /* Two-column layout */
+  flex-direction: row; /* Default: Two-column layout */
   gap: 40px; /* Space between the two columns */
   max-width: 1400px; /* Constrain the width */
   width: 100%; /* Make it responsive */
@@ -24,12 +24,11 @@
   box-sizing: border-box; /* Ensure padding doesn't affect width */
 }
 
-
-/* Left Column */
+/* Left Column: Text */
 .home-text {
-  flex: 1; /* Allow this column to take half the space */
+  flex: 1;
   display: flex;
-  flex-direction: column; /* Stack content vertically */
+  flex-direction: column;
   justify-content: center;
 }
 
@@ -94,48 +93,153 @@
 
 .btn-secondary:hover {
   background-color: #444444; /* Dark gray background */
+  border-color: #222222;
   color: white; /* White text on hover */
   transform: translateY(-2px); /* Slight elevation */
 }
 
-/* Right Column */
+/* Right Column: Video */
 .home-image {
-  flex: 1; /* Allow this column to take half the space */
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .home-video {
-  width: 100%; /* Full width of the container */
+  width: 100%;
   max-width: 600px; /* Restrict the max width */
-  border-radius: 5px; /* Optional: Rounded corners for the video */
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15),
-              0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Shadow for aesthetics */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add hover effects */
+  border-radius: 5px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .home-video:hover {
   transform: scale(1.03); /* Slight zoom effect on hover */
-  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2),
-              0 6px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2), 0 6px 10px rgba(0, 0, 0, 0.15);
 }
 
-/* Social Media Icons */
-.social-icons {
+/* Responsive Design for Mobile */
+@media screen and (max-width: 768px) {
+  .home-container {
+    flex-direction: column-reverse; /* Stack video first, then text */
+    margin-top: 100px;
+    gap: 20px; /* Smaller gap between stacked elements */
+    align-items: center; /* Center align for mobile */
+    padding: 0 5%; /* Reduce padding on smaller screens */
+  }
+
+  .home-text {
+    text-align: center; /* Center-align text on mobile */
+    align-items: center; /* Center items */
+  }
+
+  .home-title {
+    font-size: 2rem; /* Reduce font size for mobile */
+  }
+
+  .home-subtitle {
+    font-size: 1rem; /* Adjust subtitle size */
+  }
+
+  .home-buttons {
+    justify-content: center;
+  }
+
+  .home-video {
+    margin-bottom: 20px; /* Add spacing below the video */
+    max-width: 80%; /* Ensure video is responsive */
+  }
+}
+
+/* Popup Overlay */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.8); /* Light transparent background */
   display: flex;
-  gap: 15px;
-  margin-top: 20px;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
 }
 
-.social-icon {
-  color: #888888;
-  font-size: 1.5rem;
-  text-decoration: none;
-  transition: color 0.3s ease;
+/* Popup Form Styling */
+.popup-content {
+  background: #fff;
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 400px; /* Limit the popup width */
+  text-align: center;
+  position: relative;
 }
 
-.social-icon:hover {
-  color: #444444;
+/* Close Button */
+.popup-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
 }
 
+/* Form Groups */
+.form-group {
+  margin-bottom: 15px; /* Spacing between fields */
+  text-align: left;
+  padding: 0 10px; /* Add padding inside each group */
+  box-sizing: border-box; /* Ensure padding doesn't affect width */
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+/* Form Fields */
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 0.95rem;
+  transition: background-color 0.3s ease;
+  box-sizing: border-box; /* Prevent overflow issues */
+}
+
+/* Form Fields on Focus */
+.form-group input:focus,
+.form-group textarea:focus {
+  background-color: #f9f9f9; /* Slightly lighter background on focus */
+  outline: none; /* Remove default outline */
+  border-color: #444; /* Highlight border */
+}
+
+/* Submit Button */
+.btn-submit {
+  width: calc(100% - 20px); /* Ensure padding doesn't make the button overflow */
+  margin: 10px auto 0;
+  background: #444;
+  color: #fff;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+  background: #222;
+}

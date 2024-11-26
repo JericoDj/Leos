@@ -53,11 +53,7 @@ function About() {
           ))}
         </div>
 
-        {/* Call to Action */}
-        <div className="about-cta">
-          <p>Interested in working with us? Let&apos;s collaborate and bring your vision to life!</p>
-          <a href="#contact" className="btn-primary">Contact Us</a>
-        </div>
+        
       </div>
     </section>
   );

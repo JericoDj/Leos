@@ -1,0 +1,89 @@
+/* App Bar Styling */
+.app-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 70px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 0 20px; /* Consistent padding around the navbar */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    color: #2a2a2a;
+  }
+  
+  /* Logo Styling */
+  .logo-container {
+    right: 100px;
+    top: 0px;
+    bottom: 10px;
+    flex: 2; /* Push the logo to the left */
+  }
+  
+  .logo-image {
+    height: 80px; /* Adjusted height for consistency */
+    width: 130px;
+    max-width: 100%;
+    object-fit: cover;
+  }
+  
+  /* Menu Styling */
+  .menu {
+    top: 30px;
+    flex: 2; /* Center-align menu */
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 30px; /* Equal spacing between menu items */
+  }
+  
+  .menu li {
+    margin: 0;
+  }
+  
+  .menu a {
+    text-decoration: none;
+    color: #4a4a4a;
+    font-weight: bold;
+    padding: 8px 15px; /* Add padding for clickable area */
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .menu a:hover {
+    background-color: #d8d8d8;
+    color: #000000;
+  }
+  
+  .menu a.active {
+    background-color: #444444;
+    color: #ffffff;
+  }
+  
+  /* Contact Button Styling */
+  .contact-container {
+    top: 12.5px;
+    flex: 1; /* Push the contact button to the right */
+    display: flex;
+    justify-content: flex-end; /* Align to the right */
+  }
+  
+  .contact-button {
+    background-color: #444444;
+    color: #ffffff;
+    padding: 10px 15px; /* Consistent button padding */
+    border-radius: 5px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .contact-button:hover {
+    background-color: #222222;
+    transform: scale(1.05);
+  }
+  

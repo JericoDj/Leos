@@ -11,14 +11,14 @@
 }
 
 .projects-title {
-  font-size: 2.5rem;
+  font-size: 3rem; /* Increased font size for title */
   font-weight: bold;
   color: #222222;
   margin-bottom: 20px;
 }
 
 .projects-description {
-  font-size: 1.2rem;
+  font-size: 1.4rem; /* Slightly increased description font size */
   color: #555555;
   margin-bottom: 40px;
 }
@@ -35,7 +35,7 @@
   background: #ffffff;
   border-radius: 8px;
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+  padding: 25px; /* Increased padding for better spacing */
   text-align: left;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -46,16 +46,16 @@
 }
 
 .project-card h3 {
-  font-size: 1.5rem;
+  font-size: 2rem; /* Increased size for project titles */
   font-weight: bold;
   color: #222222;
   margin-bottom: 15px;
 }
 
 .project-card p {
-  font-size: 1rem;
+  font-size: 1.2rem; /* Increased size for project descriptions */
   color: #666666;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .project-card ul {
@@ -65,7 +65,7 @@
 }
 
 .project-card li {
-  font-size: 1rem;
+  font-size: 1.1rem; /* Slightly larger list font size */
   color: #444444;
   margin-bottom: 10px;
   padding-left: 20px;
@@ -80,15 +80,18 @@
   left: 0;
 }
 
+/* View Project Button */
 .project-link {
   display: inline-block;
-  margin-top: 10px;
-  padding: 10px 20px;
+  margin-top: 20px;
+  padding: 15px 30px; /* Expanded button size */
   background-color: #444444;
   color: #ffffff;
   text-decoration: none;
   border-radius: 5px;
-  font-size: 1rem;
+  font-size: 1.2rem; /* Slightly larger button text */
+  font-weight: bold; /* Bold button text */
+  text-align: center; /* Center text */
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
@@ -100,12 +103,12 @@
 /* Logo Styling */
 .project-logo {
   text-align: center;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .project-logo img {
-  width: 100px;
-  height: 100px;
+  width: 120px; /* Slightly larger logo size */
+  height: 120px;
   border-radius: 50%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -114,13 +117,14 @@
 .image-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* 2 columns */
-  gap: 10px;
+  gap: 15px; /* Adjusted spacing between images */
   margin-top: 20px;
 }
 
 .image-item img {
   width: 100%;
-  height: auto;
+  height: 180px; /* Set a consistent height for all images */
+  object-fit: cover; /* Ensures images are cropped consistently */
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -129,4 +133,18 @@
 .image-item img:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Center the View Project Button */
+.project-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto; /* Center the button */
+}
+
+.project-link:hover{
+  color: white;
+
+
 }

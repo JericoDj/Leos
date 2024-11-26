@@ -1,4 +1,18 @@
 import "./Projects.css";
+import EdukidLogo from "../../assets/EdukidLogo.png";
+import TimekeeperLogo from "../../assets/TimekeeperLogo.png";
+
+// EduKid Images
+import Edukid1 from "../../assets/edukid/Edukid1.png";
+import Edukid2 from "../../assets/edukid/Edukid2.png";
+import Edukid3 from "../../assets/edukid/Edukid3.png";
+import Edukid4 from "../../assets/edukid/Edukid4.png";
+
+// TimeKeeper Images
+import Timekeeper1 from "../../assets/timekeeper/Timekeeper1.png";
+import Timekeeper2 from "../../assets/timekeeper/Timekeeper2.png";
+import Timekeeper3 from "../../assets/timekeeper/Timekeeper3.png";
+import Timekeeper4 from "../../assets/timekeeper/Timekeeper4.png";
 
 function Projects() {
   return (
@@ -14,7 +28,7 @@ function Projects() {
           <div className="project-card">
             {/* Logo */}
             <div className="project-logo">
-              <img src="https://via.placeholder.com/100x100" alt="EduKid Logo" />
+              <img src={EdukidLogo} alt="EduKid Logo" />
             </div>
             <h3>EduKid</h3>
             <p>
@@ -27,16 +41,16 @@ function Projects() {
             </ul>
             <div className="image-grid">
               <div className="image-item">
-                <img src="https://via.placeholder.com/400x240" alt="EduKid Placeholder 1" />
+                <img src={Edukid1} alt="EduKid Screenshot 1" />
               </div>
               <div className="image-item">
-                <img src="https://via.placeholder.com/400x240" alt="EduKid Placeholder 2" />
+                <img src={Edukid2} alt="EduKid Screenshot 2" />
               </div>
               <div className="image-item">
-                <img src="https://via.placeholder.com/400x240" alt="EduKid Placeholder 3" />
+                <img src={Edukid3} alt="EduKid Screenshot 3" />
               </div>
               <div className="image-item">
-                <img src="https://via.placeholder.com/400x240" alt="EduKid Placeholder 4" />
+                <img src={Edukid4} alt="EduKid Screenshot 4" />
               </div>
             </div>
             <a
@@ -53,9 +67,9 @@ function Projects() {
           <div className="project-card">
             {/* Logo */}
             <div className="project-logo">
-              <img src="https://via.placeholder.com/100x100" alt="TimeKeeper Logo" />
+              <img src={TimekeeperLogo} alt="TimeKeeper Logo" />
             </div>
-            <h3>TimeKeeper</h3>
+            <h3>Timekeeper</h3>
             <p>
               A powerful HR tool designed to track employee attendance and time management efficiently. Key features include:
             </p>
@@ -66,20 +80,20 @@ function Projects() {
             </ul>
             <div className="image-grid">
               <div className="image-item">
-                <img src="https://via.placeholder.com/400x240" alt="TimeKeeper Placeholder 1" />
+                <img src={Timekeeper1} alt="TimeKeeper Screenshot 1" />
               </div>
               <div className="image-item">
-                <img src="https://via.placeholder.com/400x240" alt="TimeKeeper Placeholder 2" />
+                <img src={Timekeeper2} alt="TimeKeeper Screenshot 2" />
               </div>
               <div className="image-item">
-                <img src="https://via.placeholder.com/400x240" alt="TimeKeeper Placeholder 3" />
+                <img src={Timekeeper3} alt="TimeKeeper Screenshot 3" />
               </div>
               <div className="image-item">
-                <img src="https://via.placeholder.com/400x240" alt="TimeKeeper Placeholder 4" />
+                <img src={Timekeeper4} alt="TimeKeeper Screenshot 4" />
               </div>
             </div>
             <a
-              href="https://timekeeper.netlify.app"
+              href="https://timekeeperbyleos.netlify.app"
               target="_blank"
               rel="noopener noreferrer"
               className="project-link"

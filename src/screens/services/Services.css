@@ -130,3 +130,111 @@
 .example-item.flipped .example-back {
   transform: rotateY(180deg);
 }
+
+
+.inquire-button {
+  background-color: #444444;
+  color: white;
+  padding: 12px 25px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.inquire-button:hover {
+  background-color: #222222;
+  transform: translateY(-2px);
+}
+ 
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+/* Popup Form Styling */
+.popup-content {
+  background: #fff;
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 400px; /* Limit the popup width */
+  text-align: center;
+  position: relative;
+}
+
+/* Close Button */
+.popup-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+}
+
+/* Form Groups */
+.form-group {
+  margin-bottom: 15px; /* Spacing between fields */
+  text-align: left;
+  padding: 0 10px; /* Add padding inside each group */
+  box-sizing: border-box; /* Ensure padding doesn't affect width */
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+/* Form Fields */
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 0.95rem;
+  transition: background-color 0.3s ease;
+  box-sizing: border-box; /* Prevent overflow issues */
+}
+
+/* Form Fields on Focus */
+.form-group input:focus,
+.form-group textarea:focus {
+  background-color: #f9f9f9; /* Slightly lighter background on focus */
+  outline: none; /* Remove default outline */
+  border-color: #444; /* Highlight border */
+}
+
+/* Submit Button */
+.btn-submit {
+  width: calc(100% - 20px); /* Ensure padding doesn't make the button overflow */
+  margin: 10px auto 0;
+  background: #444;
+  color: #fff;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+  background: #222;
+}

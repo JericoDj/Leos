@@ -119,5 +119,6 @@
 
 .btn-primary:hover {
   background: #222222;
+  color: white;
   transform: translateY(-2px);
 }

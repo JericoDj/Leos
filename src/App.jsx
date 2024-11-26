@@ -1,66 +1,35 @@
-import  { useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
+import Navbar from "./Navbar"; // Import the desktop Navbar component
+import MobileNavbar from "./MobileNavbar"; // Import the mobile Navbar component
 import Home from "./screens/home/Home";
 import About from "./screens/about/About";
 import Services from "./screens/services/Services";
 import Projects from "./screens/projects/Projects";
-// Import your logo image
-import logo from "./assets/logo.png"; // Update the path and filename as needed
+import footerLogo from "./assets/LogoLighterGrey.png";
 
 function App() {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 900); // Adjusted threshold to 900px
+
   useEffect(() => {
-    const sections = document.querySelectorAll("section");
-    const navLinks = document.querySelectorAll(".menu a");
-
-    const handleScroll = () => {
-      let currentSection = "";
-      sections.forEach((section) => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (window.scrollY >= sectionTop - sectionHeight / 3) {
-          currentSection = section.getAttribute("id");
-        }
-      });
-
-      navLinks.forEach((link) => {
-        link.classList.remove("active");
-        if (link.getAttribute("href").includes(currentSection)) {
-          link.classList.add("active");
-        }
-      });
+    // Function to update the isMobile state when the window is resized
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 900); // Adjusted threshold to 900px
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    // Attach the resize listener
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup on unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []); // Empty dependency array ensures the effect runs only once on mount
 
   return (
     <>
-      <nav className="app-bar">
-        <div className="logo-container">
-          {/* Replace text with the logo image */}
-          <img src={logo} alt="Leos Group Logo" className="logo-image" />
-        </div>
-        <ul className="menu">
-          <li>
-            <a href="#home">Home</a>
-          </li>
-          <li>
-            <a href="#about">About</a>
-          </li>
-          <li>
-            <a href="#services">Services</a>
-          </li>
-          <li>
-            <a href="#projects">Projects</a>
-          </li>
-        </ul>
-        <div className="contact-container">
-          <a href="#contact" className="contact-button">
-            Contact us
-          </a>
-        </div>
-      </nav>
+      {/* Render MobileNavbar if isMobile is true, otherwise render Navbar */}
+      {isMobile ? <MobileNavbar /> : <Navbar />}
       <div className="body-content">
         <Home />
         <About />
@@ -68,33 +37,29 @@ function App() {
         <Projects />
       </div>
       <footer className="footer">
-        <div className="footer-container">
-          <div className="footer-logo">
-            {/* Replace text with the logo image */}
-            <img src={logo} alt="Leos Group Logo" className="logo-image" />
-          </div>
-          <div className="footer-links">
-            <a href="#home" className="footer-link">
-              Home
-            </a>
-            <a href="#about" className="footer-link">
-              About
-            </a>
-            <a href="#services" className="footer-link">
-              Services
-            </a>
-            <a href="#projects" className="footer-link">
-              Projects
-            </a>
-            <a href="#contact" className="footer-link">
-              Contact
-            </a>
-          </div>
-          <p className="footer-copyright">
-            © {new Date().getFullYear()} Leos Group. All rights reserved.
-          </p>
-        </div>
-      </footer>
+  <div className="footer-container">
+    {/* Footer Logo */}
+    <div className="footer-logo">
+      <a href="#home">
+        <img src={footerLogo} alt="Leos Group Logo" className="logo-image" />
+      </a>
+    </div>
+
+    {/* Footer Contact */}
+    <div className="footer-contact">
+      <p>Contact us:</p>
+      <a href="mailto:dejesusjerico528@gmail.com" className="footer-email">dejesusjerico528@gmail.com</a>
+      <p className="footer-phone">09760143260</p>
+    </div>
+  </div>
+
+  {/* Footer Copyright */}
+  <p className="footer-copyright">
+    © {new Date().getFullYear()} Leos Group. All rights reserved.
+  </p>
+</footer>
+
+
     </>
   );
 }
