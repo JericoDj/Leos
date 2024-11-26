@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { Player } from "@lottiefiles/react-lottie-player";
 import {
   FaTaxi,
   FaUtensils,
@@ -13,6 +14,8 @@ import {
   FaBuilding,
 } from "react-icons/fa";
 import "./Services.css";
+import MobileAppAnimation from "../../assets/MobileApp.json";
+import WebsiteAnimation from "../../assets/Website.json";
 
 function Services() {
   const [activeMobileProject, setActiveMobileProject] = useState(null);
@@ -39,7 +42,9 @@ function Services() {
         transition={{ duration: 0.6 }}
       >
         <div className="example-front">
-          {item.icon}
+          <div className="example-icon-container">
+            <div className="example-icon">{item.icon}</div>
+          </div>
           <p>{item.label}</p>
         </div>
         <div className="example-back">
@@ -59,7 +64,14 @@ function Services() {
         <div className="services-grid">
           {/* Mobile App Development */}
           <div className="service-card">
-            <FaCogs className="service-icon" />
+            <Player
+              autoplay
+              loop
+              src={MobileAppAnimation}
+              className="service-animation mobile-animation"
+              style={{ width: "400px", height: "250px", marginBottom: "25px", marginTop: "25px" }}
+            />
+
             <h3>Mobile App Development</h3>
             <ul className="service-features">
               <li>Cross-platform development using Flutter for a single codebase.</li>
@@ -90,7 +102,13 @@ function Services() {
 
           {/* Web Development */}
           <div className="service-card">
-            <FaLaptop className="service-icon" />
+            <Player
+              autoplay
+              loop
+              src={WebsiteAnimation}
+              className="service-animation"
+              style={{ width: "400px", height: "250px", marginBottom: "20px" }}
+            />
             <h3>Web Development</h3>
             <ul className="service-features">
               <li>Interactive websites optimized for both desktop and mobile devices.</li>

@@ -70,7 +70,7 @@
 /* Custom Backgrounds */
 .value-image {
   width: 100%;
-  height: 150px;
+  height: 40px;
   border-radius: 8px;
   margin-bottom: 15px;
   background-size: cover;
@@ -79,17 +79,17 @@
 
 /* Innovation Background */
 .innovation-image {
-  background-image: url('../../assets/Innovate.jpg'); /* Corrected path */
+  background-image: url('../../assets/Innovate.json'); /* Corrected path */
 }
 
 /* Quality Background */
 .quality-image {
-  background-image: url('../../assets/Quality.jpg'); /* Corrected path */
+  background-image: url('../../assets/Quality.json'); /* Corrected path */
 }
 
 /* Relationships Background */
 .relationships-image {
-  background-image: url('../../assets/Relationship.jpg'); /* Corrected path */
+  background-image: url('../../assets/Relationship.json'); /* Corrected path */
 }
 
 

@@ -1,4 +1,30 @@
+
+import { Player } from "@lottiefiles/react-lottie-player"; // Import Lottie player
+import innovationAnimation from "../../assets/Innovate.json";
+import qualityAnimation from "../../assets/Quality.json";
+import relationshipAnimation from "../../assets/Relationship.json";
 import "./About.css";
+
+const values = [
+  {
+    title: "Innovation",
+    animation: innovationAnimation,
+    description:
+      "Embracing cutting-edge technology to deliver the best solutions. We utilize AI, cloud computing, and automation to create groundbreaking solutions for our clients.",
+  },
+  {
+    title: "Quality",
+    animation: qualityAnimation,
+    description:
+      "Dedicated to maintaining excellence in everything we do. Our quality assurance team ensures every project exceeds industry standards and client expectations.",
+  },
+  {
+    title: "Relationships",
+    animation: relationshipAnimation,
+    description:
+      "Building lasting connections with clients and partners. We believe in transparent communication and trust, making us a partner you can rely on.",
+  },
+];
 
 function About() {
   return (
@@ -13,32 +39,18 @@ function About() {
 
         {/* Values Section */}
         <div className="about-values">
-          <div className="value-card">
-            <div className="value-image innovation-image"></div> {/* Innovation Background */}
-            <h3>Innovation</h3>
-            <p>
-              Embracing cutting-edge technology to deliver the best solutions. We utilize AI, cloud computing, 
-              and automation to create groundbreaking solutions for our clients.
-            </p>
-          </div>
-
-          <div className="value-card">
-            <div className="value-image quality-image"></div> {/* Quality Background */}
-            <h3>Quality</h3>
-            <p>
-              Dedicated to maintaining excellence in everything we do. Our quality assurance team ensures every project 
-              exceeds industry standards and client expectations.
-            </p>
-          </div>
-
-          <div className="value-card">
-            <div className="value-image relationships-image"></div> {/* Relationships Background */}
-            <h3>Relationships</h3>
-            <p>
-              Building lasting connections with clients and partners. We believe in transparent communication 
-              and trust, making us a partner you can rely on.
-            </p>
-          </div>
+          {values.map((value, index) => (
+            <div key={index} className="value-card">
+              <Player
+                autoplay
+                loop
+                src={value.animation} // Load the JSON animation
+                className="value-animation"
+              />
+              <h3>{value.title}</h3>
+              <p>{value.description}</p>
+            </div>
+          ))}
         </div>
 
         {/* Call to Action */}

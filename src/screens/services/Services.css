@@ -49,10 +49,26 @@
   box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
 }
 
-.service-icon {
+/* Circular Button-Like Icons */
+.example-icon-container {
+  width: 80px;
+  height: 80px;
+  background: #222222; /* Blue background */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.example-icon-container:hover {
+  background: #3d3d3d; /* Darker blue on hover */
+}
+
+.example-icon {
   font-size: 2rem;
-  color: #444444;
-  margin-bottom: 15px;
+  color: rgb(202, 208, 23); /* White icon color */
 }
 
 /* Examples Grid */
@@ -68,7 +84,7 @@
   height: 200px;
   background: #ffffff;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(6, 6, 6, 0.1);
   cursor: pointer;
   text-align: center;
   perspective: 1000px;
@@ -78,9 +94,10 @@
 }
 
 .example-item:hover {
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 15px rgba(81, 81, 81, 0.15);
 }
 
+/* Front and Back Cards */
 .example-front,
 .example-back {
   width: 100%;
@@ -94,7 +111,6 @@
   justify-content: center;
   align-items: center;
   border-radius: 8px;
-  box-shadow: inherit;
 }
 
 .example-front {
@@ -112,25 +128,5 @@
 }
 
 .example-item.flipped .example-back {
-  transform: rotateY(180);
-}
-
-/* Prevent Overlap */
-.examples-grid {
-  overflow: hidden; /* Prevent elements from overflowing */
-}
-
-.service-card {
-  margin-bottom: 40px; /* Ensure enough space between the service card and examples */
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .examples-grid {
-    grid-template-columns: repeat(2, 1fr); /* Adjust to two columns for smaller screens */
-  }
-
-  .example-item {
-    height: 180px;
-  }
+  transform: rotateY(180deg);
 }
