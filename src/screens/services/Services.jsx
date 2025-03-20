@@ -105,7 +105,7 @@ function Services() {
               autoplay
               loop
               src={MobileAppAnimation}
-              className="service-animation mobile-animation"
+              className="mobile-animation"
               style={{ width: "400px", height: "250px", margin: "25px 0" }}
             />
             <h3>Mobile App Development</h3>
@@ -130,7 +130,9 @@ function Services() {
               loop
               src={WebsiteAnimation}
               className="service-animation"
-              style={{ width: "400px", height: "250px", margin: "20px 0" }}
+              
+              style={{
+                 width: "400px", height: "250px", margin: "20px 0" }}
             />
             <h3>Web Development</h3>
             <ul className="service-features">
