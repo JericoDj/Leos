@@ -1,68 +1,104 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import "tailwindcss";
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+@layer base {
+  html {
+    scroll-behavior: smooth;
   }
-  a:hover {
-    color: #747bff;
+
+  body {
+    @apply antialiased font-sans text-slate-800;
+    /* Liquid glass premium whitish silver background */
+    background: radial-gradient(ellipse at top left, #fff7f0, #f1f5f9);
+    background-attachment: fixed;
+    min-height: 100vh;
+    margin: 0;
   }
-  button {
-    background-color: #f9f9f9;
+}
+
+@layer utilities {
+
+  /* Premium Glassmorphism Utilities */
+  .glass-panel {
+    @apply bg-white/40 backdrop-blur-xl border border-white/60 shadow-lg rounded-2xl;
+  }
+
+  .glass-header {
+    @apply bg-white/50 backdrop-blur-xl border-b border-white/60 shadow-sm;
+  }
+
+  .glass-button {
+    @apply bg-white/50 backdrop-blur-md border border-white/80 shadow-sm rounded-xl hover:bg-white/80 hover:shadow text-slate-800 transition-all duration-300 font-medium px-6 py-2.5;
+  }
+
+  .glass-button-primary {
+    @apply bg-slate-800 backdrop-blur-md border border-slate-700 shadow-lg rounded-xl hover:bg-slate-700 hover:shadow-xl text-white transition-all duration-300 font-medium px-6 py-2.5;
+  }
+
+  /* Custom flip effect utilities */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .transform-style-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
+
+  /* Dialog animations */
+  @keyframes dialog-backdrop-in {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes dialog-panel-in {
+    0% {
+      opacity: 0;
+      transform: scale(0.9) translateY(24px);
+    }
+
+    60% {
+      transform: scale(1.02) translateY(-4px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-dialog-backdrop {
+    animation: dialog-backdrop-in 0.25s ease-out forwards;
+  }
+
+  .animate-dialog-panel {
+    animation: dialog-panel-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.5s ease-out forwards;
   }
 }
