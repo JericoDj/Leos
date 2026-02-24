@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 
 
 function Navbar() {
-  const [showPopup, setShowPopup] = useState(false); // State to manage popup visibility
   const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
@@ -25,17 +24,8 @@ function Navbar() {
   }, []);
 
   const openPopup = () => {
-    setShowPopup(true);
-  };
-
-  const closePopup = () => {
-    setShowPopup(false);
-  };
-
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    alert("Your message has been sent!");
-    setShowPopup(false); // Close the popup after submission
+    // Dispatch custom event to open Services modal
+    window.dispatchEvent(new CustomEvent("open-services-popup"));
   };
 
   const navLinks = [
@@ -88,37 +78,6 @@ function Navbar() {
         </nav>
       </div>
 
-      {/* Popup Form */}
-      {showPopup && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center px-4 animate-dialog-backdrop" onClick={closePopup}>
-          <div className="absolute inset-0 bg-slate-900/50 backdrop-blur-md"></div>
-          <div
-            className="relative w-full max-w-lg bg-white/80 backdrop-blur-2xl border border-white/70 shadow-2xl shadow-amber-500/10 rounded-3xl overflow-hidden animate-dialog-panel"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="bg-gradient-to-r from-amber-600 to-orange-500 px-8 py-6">
-              <h2 className="text-2xl font-bold text-white tracking-tight">Get in Touch</h2>
-              <p className="text-amber-100 text-sm mt-1">We&apos;d love to hear about your project.</p>
-            </div>
-            <button className="absolute top-4 right-5 text-white/80 hover:text-white text-2xl leading-none transition-colors" onClick={closePopup}>&times;</button>
-            <form onSubmit={handleFormSubmit} className="p-8 space-y-5">
-              <div>
-                <label htmlFor="name" className="block text-sm font-semibold text-slate-700 mb-1.5">Full Name</label>
-                <input type="text" id="name" name="name" placeholder="Cardo Luna" required className="w-full px-4 py-3 bg-white/70 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-400 focus:border-amber-400 outline-none transition-all placeholder-slate-400 text-slate-800 shadow-sm" />
-              </div>
-              <div>
-                <label htmlFor="email" className="block text-sm font-semibold text-slate-700 mb-1.5">Email Address</label>
-                <input type="email" id="email" name="email" placeholder="cardoluna@mail.com" required className="w-full px-4 py-3 bg-white/70 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-400 focus:border-amber-400 outline-none transition-all placeholder-slate-400 text-slate-800 shadow-sm" />
-              </div>
-              <div>
-                <label htmlFor="message" className="block text-sm font-semibold text-slate-700 mb-1.5">Your Message</label>
-                <textarea id="message" name="message" rows="4" placeholder="Tell us about your project..." required className="w-full px-4 py-3 bg-white/70 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-400 focus:border-amber-400 outline-none transition-all placeholder-slate-400 text-slate-800 resize-none shadow-sm"></textarea>
-              </div>
-              <button type="submit" className="w-full bg-gradient-to-r from-amber-600 to-orange-500 hover:from-amber-700 hover:to-orange-600 text-white font-bold py-3.5 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 tracking-wide">Send Message</button>
-            </form>
-          </div>
-        </div>
-      )}
     </>
   );
 }

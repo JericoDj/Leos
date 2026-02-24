@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { motion, AnimatePresence } from "framer-motion";
 import { mobileProjects, webProjects } from "../../data/projectsData";
 
@@ -138,6 +139,19 @@ function Projects() {
         </motion.div>
       </div>
     );
+  };
+
+  ProjectCard.propTypes = {
+    project: PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      title: PropTypes.string.isRequired,
+      category: PropTypes.string,
+      description: PropTypes.string,
+      image: PropTypes.string,
+      link: PropTypes.string,
+      gallery: PropTypes.arrayOf(PropTypes.string),
+    }).isRequired,
+    type: PropTypes.string.isRequired,
   };
 
   return (

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import toast from "react-hot-toast";
 import { motion, AnimatePresence } from "framer-motion";// Video Assets
 import MobileVid from "../../assets/Mobiile_Animation.mp4";
 import WebVid from "../../assets/web_animation.mp4";
@@ -35,6 +36,12 @@ const capabilities = [
 function Services() {
     const [showPopup, setShowPopup] = useState(false);
 
+    useEffect(() => {
+        const handleOpenPopup = () => setShowPopup(true);
+        window.addEventListener("open-services-popup", handleOpenPopup);
+        return () => window.removeEventListener("open-services-popup", handleOpenPopup);
+    }, []);
+
     const openPopup = () => {
         setShowPopup(true);
     };
@@ -43,11 +50,36 @@ function Services() {
         setShowPopup(false);
     };
 
-    const handleFormSubmit = (e) => {
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const handleFormSubmit = async (e) => {
         e.preventDefault();
-        alert("Your inquiry has been sent!");
-        setShowPopup(false);
-        e.target.reset();
+        setIsSubmitting(true);
+
+        const formData = new FormData(e.target);
+        formData.append("access_key", import.meta.env.VITE_WEB3FORMS_ACCESS_KEY);
+
+        try {
+            const response = await fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                toast.success("Your inquiry has been sent!");
+                setShowPopup(false);
+                e.target.reset();
+            } else {
+                toast.error("Something went wrong. " + data.message);
+            }
+        } catch (error) {
+            console.error("Form submission error:", error);
+            toast.error("Something went wrong. Please try again later.");
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -154,7 +186,13 @@ function Services() {
                                     <label htmlFor="message-service" className="block text-sm font-semibold text-slate-700 mb-1.5">Your Message</label>
                                     <textarea id="message-service" name="message" rows="4" placeholder="Tell us about your project..." required className="w-full px-4 py-3 bg-white/70 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-400 focus:border-amber-400 outline-none transition-all placeholder-slate-400 text-slate-800 resize-none shadow-sm"></textarea>
                                 </div>
-                                <button type="submit" className="w-full bg-gradient-to-r from-amber-600 to-orange-500 hover:from-amber-700 hover:to-orange-600 text-white font-bold py-3.5 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 tracking-wide">Send Message</button>
+                                <button
+                                    type="submit"
+                                    disabled={isSubmitting}
+                                    className="w-full bg-gradient-to-r from-amber-600 to-orange-500 hover:from-amber-700 hover:to-orange-600 text-white font-bold py-3.5 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 tracking-wide disabled:opacity-50"
+                                >
+                                    {isSubmitting ? "Sending..." : "Send Message"}
+                                </button>
                             </form>
                         </motion.div>
                     </motion.div>

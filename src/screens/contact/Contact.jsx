@@ -1,14 +1,37 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 function Contact() {
     const [submitted, setSubmitted] = useState(false);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        alert("Thank you! We'll be in touch soon.");
         setSubmitted(true);
-        e.target.reset();
-        setTimeout(() => setSubmitted(false), 3000);
+
+        const formData = new FormData(e.target);
+        formData.append("access_key", import.meta.env.VITE_WEB3FORMS_ACCESS_KEY);
+
+        try {
+            const response = await fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                toast.success("Thank you! We'll be in touch soon.");
+                e.target.reset();
+                setTimeout(() => setSubmitted(false), 3000);
+            } else {
+                toast.error("Something went wrong. " + data.message);
+                setSubmitted(false);
+            }
+        } catch (error) {
+            console.error("Form submission error: ", error);
+            toast.error("Something went wrong. Please try again later.");
+            setSubmitted(false);
+        }
     };
 
     return (
@@ -45,7 +68,7 @@ function Contact() {
                                 disabled={submitted}
                                 className="w-full bg-gradient-to-r from-amber-600 to-orange-500 hover:from-amber-700 hover:to-orange-600 text-white font-bold py-3.5 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 tracking-wide disabled:opacity-50"
                             >
-                                {submitted ? "Sent! ✓" : "Send Message"}
+                                {submitted ? "Sending..." : "Send Message"}
                             </button>
                         </form>
                     </div>

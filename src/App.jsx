@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Toaster } from "react-hot-toast";
 import Navbar from "./Navbar"; // Import the desktop Navbar component
 import MobileNavbar from "./MobileNavbar"; // Import the mobile Navbar component
 import Home from "./screens/home/Home";
@@ -33,6 +34,27 @@ function App() {
 
   return (
     <div className="min-h-screen flex flex-col pt-20 overflow-x-hidden">
+      <Toaster
+        position="bottom-center"
+        toastOptions={{
+          style: {
+            background: 'rgba(255, 255, 255, 0.9)',
+            color: '#1e293b',
+            backdropFilter: 'blur(12px)',
+            border: '1px solid rgba(255, 255, 255, 0.4)',
+            boxShadow: '0 10px 25px -5px rgba(245, 158, 11, 0.1)',
+            borderRadius: '16px',
+            padding: '16px 24px',
+            fontWeight: '600',
+          },
+          success: {
+            iconTheme: {
+              primary: '#d97706', // amber-600
+              secondary: '#fff',
+            }
+          }
+        }}
+      />
       {/* Render MobileNavbar if isMobile is true, otherwise render Navbar */}
       {isMobile ? <MobileNavbar /> : <Navbar />}
 
