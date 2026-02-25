@@ -121,6 +121,6 @@ export const webProjects = [
         category: "Business Web App",
         image: Sauceey,
         description: "A bespoke business e-commerce platform for gourmet sauces and culinary products.",
-        link: "https://sauceey.netlify.app/"
+        link: "https://saucebusiness.netlify.app/"
     },
 ];
