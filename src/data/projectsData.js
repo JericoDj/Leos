@@ -105,7 +105,7 @@ export const webProjects = [
         category: "Educational Web App",
         image: MathCode,
         description: "An interactive web-based learning platform for math and coding enthusiasts.",
-        link: "https://mathcode.netlify.app/"
+        link: "https://mathcode.web.app/"
     },
     {
         id: 7,
