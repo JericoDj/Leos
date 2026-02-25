@@ -1,293 +1,482 @@
 import { useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import { motion, AnimatePresence } from "framer-motion";
 import { mobileProjects, webProjects } from "../../data/projectsData";
 
-function Projects() {
-  const [flippedCardId, setFlippedCardId] = useState(null);
-  const [selectedGallery, setSelectedGallery] = useState(null);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [direction, setDirection] = useState(0);
-
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape' && selectedGallery) {
-        closeGallery();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedGallery]);
-
-  const toggleFlip = (id) => {
-    setFlippedCardId((prev) => (prev === id ? null : id));
-  };
-
-  const openGallery = (e, project) => {
-    e.stopPropagation(); // Prevent card from flipping back
-    setSelectedGallery(project);
-    setCurrentImageIndex(0);
-  };
-
-  const closeGallery = () => {
-    setSelectedGallery(null);
-    setFlippedCardId(null);
-  };
-
-  const nextImage = (e) => {
-    e.stopPropagation();
-    if (selectedGallery?.gallery) {
-      setDirection(1);
-      setCurrentImageIndex((prev) => (prev + 1) % selectedGallery.gallery.length);
-    }
-  };
-
-  const prevImage = (e) => {
-    e.stopPropagation();
-    if (selectedGallery?.gallery) {
-      setDirection(-1);
-      setCurrentImageIndex((prev) => (prev === 0 ? selectedGallery.gallery.length - 1 : prev - 1));
-    }
-  };
-
-  const ProjectCard = ({ project, type }) => {
-    const isFlipped = flippedCardId === project.id;
-
-    return (
+/* ─────────────────────────────────────────────
+   Flip Card (Mobile Projects – 4:3 cover)
+   ───────────────────────────────────────────── */
+const FlipCard = ({ project, isFlipped, onFlip, onClose, onViewProject }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.4 }}
+    className="relative"
+    style={{ perspective: 1200 }}
+  >
+    <motion.div
+      animate={{ rotateY: isFlipped ? 180 : 0 }}
+      transition={{ duration: 0.55, ease: "easeInOut" }}
+      style={{ transformStyle: "preserve-3d", position: "relative" }}
+      className="rounded-2xl shadow-md"
+    >
+      {/* FRONT */}
       <div
-        className="relative w-full h-72 cursor-pointer group"
-        onClick={() => {
-          if (!isFlipped) setFlippedCardId(project.id);
+        style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
+        className="rounded-2xl overflow-hidden cursor-pointer"
+        onClick={onFlip}
+      >
+        <div className="relative aspect-[4/3] w-full overflow-hidden">
+          <img
+            src={project.image}
+            alt={project.title}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+          <div className="absolute bottom-4 left-4 text-white">
+            <p className="text-xs uppercase tracking-widest text-amber-400 font-bold mb-1">
+              {project.category}
+            </p>
+            <h3 className="text-xl font-bold text-white">{project.title}</h3>
+            <div className="w-10 h-0.5 bg-white/40 rounded-full mt-2" />
+          </div>
+          <div className="absolute top-3 right-3 bg-black/30 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-full">
+            Tap to flip
+          </div>
+        </div>
+      </div>
+
+      {/* BACK */}
+      <div
+        style={{
+          backfaceVisibility: "hidden",
+          WebkitBackfaceVisibility: "hidden",
+          transform: "rotateY(180deg)",
+          position: "absolute",
+          inset: 0,
         }}
-        style={{ perspective: 1200 }}
+        className="rounded-2xl bg-white border border-gray-100 flex flex-col items-center justify-center p-6 text-center gap-4 shadow-md"
+      >
+        <button
+          onClick={onClose}
+          className="absolute top-3 right-3 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-500 hover:text-gray-800 transition-colors border-none cursor-pointer text-lg leading-none"
+        >
+          ✕
+        </button>
+        <h3 className="text-xl font-bold text-gray-900">{project.title}</h3>
+        <div className="w-10 h-0.5 bg-slate-300 rounded-full" />
+        <p className="text-gray-500 text-sm leading-relaxed">{project.description}</p>
+        <button
+          onClick={() => onViewProject(project)}
+          className="mt-2 bg-gray-900 text-white text-sm font-semibold uppercase tracking-widest px-6 py-3 rounded-full hover:bg-amber-500 hover:text-gray-900 transition-colors cursor-pointer border-none"
+        >
+          View Project
+        </button>
+      </div>
+    </motion.div>
+  </motion.div>
+);
+
+/* ─────────────────────────────────────────────
+   Web Flip Card (16:9 cover + Visit Site)
+   ───────────────────────────────────────────── */
+const WebFlipCard = ({ project, isFlipped, onFlip, onClose, onViewProject }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.4 }}
+    className="relative"
+    style={{ perspective: 1200 }}
+  >
+    <motion.div
+      animate={{ rotateY: isFlipped ? 180 : 0 }}
+      transition={{ duration: 0.55, ease: "easeInOut" }}
+      style={{ transformStyle: "preserve-3d", position: "relative" }}
+      className="rounded-2xl shadow-md"
+    >
+      {/* FRONT */}
+      <div
+        style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
+        className="rounded-2xl overflow-hidden cursor-pointer"
+        onClick={onFlip}
+      >
+        <div className="relative w-full aspect-video overflow-hidden">
+          <img
+            src={project.image}
+            alt={project.title}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+          <div className="absolute bottom-4 left-4 text-white">
+            <p className="text-xs uppercase tracking-widest text-amber-400 font-bold mb-1">
+              {project.category}
+            </p>
+            <h3 className="text-lg font-bold text-white">{project.title}</h3>
+            <div className="w-10 h-0.5 bg-white/40 rounded-full mt-2" />
+          </div>
+          <div className="absolute top-3 right-3 bg-black/30 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-full">
+            Tap to flip
+          </div>
+        </div>
+      </div>
+
+      {/* BACK */}
+      <div
+        style={{
+          backfaceVisibility: "hidden",
+          WebkitBackfaceVisibility: "hidden",
+          transform: "rotateY(180deg)",
+          position: "absolute",
+          inset: 0,
+        }}
+        className="rounded-2xl bg-white border border-gray-100 flex flex-col items-center justify-center p-6 text-center gap-3 shadow-md"
+      >
+        <button
+          onClick={onClose}
+          className="absolute top-3 right-3 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-500 hover:text-gray-800 transition-colors border-none cursor-pointer text-lg leading-none"
+        >
+          ✕
+        </button>
+        <h3 className="text-xl font-bold text-gray-900">{project.title}</h3>
+        <div className="w-10 h-0.5 bg-slate-300 rounded-full" />
+        <p className="text-gray-500 text-sm leading-relaxed">{project.description}</p>
+        <div className="flex gap-3 mt-2">
+          <a
+            href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-amber-500 text-gray-900 text-sm font-semibold uppercase tracking-widest px-5 py-2.5 rounded-full hover:bg-amber-400 transition-colors no-underline"
+          >
+            Visit Site
+          </a>
+          <button
+            onClick={() => onViewProject(project)}
+            className="bg-gray-900 text-white text-sm font-semibold uppercase tracking-widest px-5 py-2.5 rounded-full hover:bg-gray-700 transition-colors cursor-pointer border-none"
+          >
+            View Project
+          </button>
+        </div>
+      </div>
+    </motion.div>
+  </motion.div>
+);
+
+/* ─────────────────────────────────────────────
+   Gallery Modal (phone or widescreen frame)
+   ───────────────────────────────────────────── */
+const GalleryModal = ({ project, onClose }) => {
+  const [idx, setIdx] = useState(0);
+  if (!project) return null;
+
+  const prev = (e) => {
+    e.stopPropagation();
+    setIdx((i) => (i - 1 + project.gallery.length) % project.gallery.length);
+  };
+  const next = (e) => {
+    e.stopPropagation();
+    setIdx((i) => (i + 1) % project.gallery.length);
+  };
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 z-[200] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+        onClick={onClose}
       >
         <motion.div
-          className="w-full h-full relative"
-          animate={{ rotateY: isFlipped ? 180 : 0 }}
-          transition={{ duration: 0.8, type: "spring", stiffness: 200, damping: 20 }}
-          style={{ transformStyle: "preserve-3d" }}
+          initial={{ scale: 0.92, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.92, opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          className="relative bg-slate-800 rounded-2xl max-w-2xl w-full p-6"
+          onClick={(e) => e.stopPropagation()}
         >
-          {/* Front: Image */}
+          {/* Header */}
+          <div className="flex justify-between items-start mb-4">
+            <div>
+              <h3 className="text-white font-bold text-lg">{project.title}</h3>
+              <p className="text-amber-400 text-xs uppercase tracking-widest">
+                {project.category}
+              </p>
+            </div>
+            <button
+              onClick={onClose}
+              className="text-white/60 hover:text-white text-2xl leading-none bg-transparent border-none cursor-pointer"
+            >
+              ✕
+            </button>
+          </div>
+
+          {/* Image frame */}
+          <div className="flex items-center justify-center gap-4">
+            <button
+              onClick={prev}
+              className="bg-white/10 hover:bg-white/20 text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors text-lg border-none cursor-pointer flex-shrink-0"
+            >
+              ←
+            </button>
+
+            {project.widescreen ? (
+              <div
+                className="relative flex-1 rounded-xl overflow-hidden bg-black shadow-2xl"
+                style={{ aspectRatio: "16/9" }}
+              >
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={idx}
+                    src={project.gallery[idx]}
+                    alt={`${project.title} screenshot ${idx + 1}`}
+                    className="w-full h-full object-contain"
+                    initial={{ opacity: 0, x: 30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -30 }}
+                    transition={{ duration: 0.25 }}
+                  />
+                </AnimatePresence>
+              </div>
+            ) : (
+              <div className="relative flex-1 max-w-[260px] mx-auto">
+                <div className="relative bg-gray-800 rounded-[2.5rem] p-2 shadow-2xl border-4 border-gray-700">
+                  <div className="rounded-[2rem] overflow-hidden aspect-[9/19.5] bg-black">
+                    <AnimatePresence mode="wait">
+                      <motion.img
+                        key={idx}
+                        src={project.gallery[idx]}
+                        alt={`${project.title} screenshot ${idx + 1}`}
+                        className="w-full h-full object-contain"
+                        initial={{ opacity: 0, x: 30 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -30 }}
+                        transition={{ duration: 0.25 }}
+                      />
+                    </AnimatePresence>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <button
+              onClick={next}
+              className="bg-white/10 hover:bg-white/20 text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors text-lg border-none cursor-pointer flex-shrink-0"
+            >
+              →
+            </button>
+          </div>
+
+          {/* Dots */}
+          <div className="flex justify-center gap-2 mt-5">
+            {project.gallery.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setIdx(i)}
+                className={`w-2 h-2 rounded-full transition-all border-none cursor-pointer ${i === idx ? "bg-amber-400 w-5" : "bg-white/30"
+                  }`}
+              />
+            ))}
+          </div>
+
+          <p className="text-center text-white/40 text-xs mt-3">
+            Premium digital solutions crafted for excellence.
+          </p>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
+};
+
+/* ─────────────────────────────────────────────
+   Web Image Modal (single cover preview)
+   ───────────────────────────────────────────── */
+const WebImageModal = ({ project, onClose }) => {
+  if (!project) return null;
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 z-[200] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+        onClick={onClose}
+      >
+        <motion.div
+          initial={{ scale: 0.92, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.92, opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          className="relative bg-slate-800 rounded-2xl max-w-3xl w-full p-6"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="flex justify-between items-start mb-4">
+            <div>
+              <h3 className="text-white font-bold text-lg">{project.title}</h3>
+              <p className="text-amber-400 text-xs uppercase tracking-widest">
+                {project.category}
+              </p>
+            </div>
+            <button
+              onClick={onClose}
+              className="text-white/60 hover:text-white text-2xl leading-none bg-transparent border-none cursor-pointer"
+            >
+              ✕
+            </button>
+          </div>
+
           <div
-            className="absolute inset-0 glass-panel overflow-hidden border-2 border-transparent group-hover:border-white/80 transition-all duration-300"
-            style={{ backfaceVisibility: "hidden" }}
+            className="rounded-xl overflow-hidden bg-black shadow-2xl"
+            style={{ aspectRatio: "16/9" }}
           >
             <img
               src={project.image}
               alt={project.title}
-              className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+              className="w-full h-full object-contain"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent flex flex-col justify-end p-5">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-amber-400 mb-1">{project.category}</span>
-              <h4 className="text-lg font-bold text-white leading-tight drop-shadow-md">{project.title}</h4>
-            </div>
           </div>
 
-          {/* Back: Info */}
-          <div
-            className="absolute inset-0 glass-panel bg-white/80 backdrop-blur-2xl flex flex-col items-center justify-center p-6 text-center shadow-2xl border border-white/90"
-            style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
-          >
-            {/* Un-flip Button */}
-            <button
-              className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-800 transition-colors z-20 shadow-sm"
-              onClick={(e) => {
-                e.stopPropagation();
-                toggleFlip(project.id);
-              }}
-              aria-label="Close details"
+          <div className="flex justify-center mt-5">
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-amber-500 text-gray-900 text-sm font-semibold uppercase tracking-widest px-6 py-3 rounded-full hover:bg-amber-400 transition-colors no-underline"
             >
-              &times;
-            </button>
-
-            <h4 className="text-xl font-bold text-slate-900 mb-3 px-4">{project.title}</h4>
-            <div className="w-12 h-0.5 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mb-4"></div>
-            <p className="text-slate-600 text-sm font-medium leading-relaxed mb-6">
-              {project.description}
-            </p>
-
-            <div className="mt-auto flex flex-col gap-2 w-full px-4">
-              {type === 'mobile' ? (
-                <button
-                  onClick={(e) => openGallery(e, project)}
-                  className="w-full bg-slate-900 text-white text-[10px] font-bold py-2.5 rounded-full hover:bg-amber-600 transition-colors shadow-md uppercase tracking-wider translate-z-10"
-                >
-                  View Project
-                </button>
-              ) : (
-                <>
-                  <button
-                    onClick={(e) => openGallery(e, { ...project, gallery: [project.image] })}
-                    className="w-full bg-slate-100 text-slate-900 border border-slate-200 text-[10px] font-bold py-2 rounded-full hover:bg-white transition-colors shadow-sm uppercase tracking-wider"
-                  >
-                    View Image
-                  </button>
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    className="w-full bg-slate-900 text-white text-[10px] font-bold py-2 rounded-full hover:bg-amber-600 transition-colors shadow-md uppercase tracking-wider translate-z-10"
-                  >
-                    Visit Project
-                  </a>
-                </>
-              )}
-            </div>
+              Visit Site
+            </a>
           </div>
-        </motion.div>
-      </div>
-    );
-  };
 
-  ProjectCard.propTypes = {
-    project: PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-      title: PropTypes.string.isRequired,
-      category: PropTypes.string,
-      description: PropTypes.string,
-      image: PropTypes.string,
-      link: PropTypes.string,
-      gallery: PropTypes.arrayOf(PropTypes.string),
-    }).isRequired,
-    type: PropTypes.string.isRequired,
-  };
+          <p className="text-center text-white/40 text-xs mt-3">
+            Premium digital solutions crafted for excellence.
+          </p>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
+};
+
+/* ─────────────────────────────────────────────
+   Main Projects Section
+   ───────────────────────────────────────────── */
+function Projects() {
+  const [activeProject, setActiveProject] = useState(null);
+  const [activeWebProject, setActiveWebProject] = useState(null);
+  const [flippedCard, setFlippedCard] = useState(null);
+
+  // Close modals on Escape
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        setActiveProject(null);
+        setActiveWebProject(null);
+        setFlippedCard(null);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   return (
-    <section id="projects" className="w-full pt-10 pb-10 scroll-mt-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="projects" className="scroll-mt-20 py-10 md:py-16 relative">
+      <div className="max-w-[1200px] mx-auto w-full">
         {/* Section Header */}
-        <div className="text-center mb-10 max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">Our Projects</h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-amber-600 to-orange-500 mx-auto rounded-full mb-8"></div>
-          <p className="text-lg text-slate-600 leading-relaxed font-medium">
-            Explore our portfolio of high-performance mobile apps and creative web solutions tailored for business success.
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-12"
+        >
+          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-4">
+            <span className="text-slate-900">Our </span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-500">
+              Projects
+            </span>
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-amber-600 to-orange-500 mx-auto rounded-full mb-6" />
+          <p className="max-w-[600px] mx-auto text-slate-600 text-lg">
+            A selection of our recent work — tap any card to see details.
           </p>
-        </div>
+        </motion.div>
 
         {/* ─── Mobile Apps ─── */}
-        <div className="mb-16">
-          <div className="flex items-center gap-4 mb-10">
-            <div className="w-2 h-8 bg-amber-500 rounded-full"></div>
-            <h3 className="text-2xl font-bold text-slate-900">Mobile App Portfolio</h3>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {mobileProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} type="mobile" />
-            ))}
-          </div>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-8 flex items-center gap-3"
+        >
+          <div className="w-1 h-8 bg-amber-500 rounded-full" />
+          <h3 className="text-2xl md:text-3xl font-bold text-slate-900">
+            Mobile Application Portfolio
+          </h3>
+        </motion.div>
+
+        <div className="flex flex-wrap justify-center gap-6">
+          {mobileProjects.map((project) => (
+            <div
+              key={project.id}
+              className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
+            >
+              <FlipCard
+                project={project}
+                isFlipped={flippedCard === project.id}
+                onFlip={() => setFlippedCard(project.id)}
+                onClose={() => setFlippedCard(null)}
+                onViewProject={setActiveProject}
+              />
+            </div>
+          ))}
         </div>
 
         {/* ─── Web Apps ─── */}
-        <div>
-          <div className="flex items-center gap-4 mb-10">
-            <div className="w-2 h-8 bg-orange-500 rounded-full"></div>
-            <h3 className="text-2xl font-bold text-slate-900">Web Application Portfolio</h3>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {webProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} type="web" />
-            ))}
-          </div>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mt-16 mb-8 flex items-center gap-3"
+        >
+          <div className="w-1 h-8 bg-orange-500 rounded-full" />
+          <h3 className="text-2xl md:text-3xl font-bold text-slate-900">
+            Web Application Portfolio
+          </h3>
+        </motion.div>
+
+        <div className="flex flex-wrap justify-center gap-6">
+          {webProjects.map((project) => (
+            <div
+              key={project.id}
+              className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
+            >
+              <WebFlipCard
+                project={project}
+                isFlipped={flippedCard === project.id}
+                onFlip={() => setFlippedCard(project.id)}
+                onClose={() => setFlippedCard(null)}
+                onViewProject={setActiveWebProject}
+              />
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* Gallery Modal */}
-      <AnimatePresence>
-        {selectedGallery && (
-          <motion.div
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4"
-            onClick={closeGallery}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="absolute inset-0 bg-slate-900/90 backdrop-blur-xl"></div>
-
-            <motion.div
-              initial={{ scale: 0.9, y: 30, opacity: 0 }}
-              animate={{ scale: 1, y: 0, opacity: 1 }}
-              exit={{ scale: 0.9, y: 30, opacity: 0 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-6xl h-[90vh] flex flex-col items-center"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Modal Header */}
-              <div className="w-full flex justify-between items-center mb-6 text-white px-2">
-                <div>
-                  <h4 className="text-2xl font-bold">{selectedGallery.title}</h4>
-                  <p className="text-amber-400 text-sm font-medium">{selectedGallery.category}</p>
-                </div>
-                <button
-                  onClick={closeGallery}
-                  className="w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white text-3xl leading-none"
-                >
-                  &times;
-                </button>
-              </div>
-
-              {/* Gallery View (Carousel for all devices) */}
-              <div className="w-full flex-grow overflow-y-auto pr-2 custom-scrollbar relative">
-
-                <div className="flex w-full h-full relative items-center justify-center overflow-hidden rounded-2xl">
-                  {selectedGallery.gallery?.length > 1 && (
-                    <>
-                      <button
-                        onClick={prevImage}
-                        className="absolute left-2 md:left-4 z-10 w-10 h-10 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-slate-900/80 text-white backdrop-blur-sm border border-white/20 text-lg md:text-2xl hover:bg-slate-800 transition-colors"
-                      >
-                        &#8592;
-                      </button>
-                      <button
-                        onClick={nextImage}
-                        className="absolute right-2 md:right-4 z-10 w-10 h-10 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-slate-900/80 text-white backdrop-blur-sm border border-white/20 text-lg md:text-2xl hover:bg-slate-800 transition-colors"
-                      >
-                        &#8594;
-                      </button>
-                    </>
-                  )}
-
-                  <div className={`w-full max-h-full rounded-2xl overflow-hidden shadow-2xl border border-white/20 bg-slate-800 flex items-center justify-center ${selectedGallery.title === "Leos POS" ? 'aspect-video' : (selectedGallery.gallery?.length === 1 ? 'aspect-video md:aspect-[16/9]' : 'aspect-[9/16] md:aspect-[9/18]')}`}>
-                    <AnimatePresence mode="wait" custom={direction}>
-                      <motion.img
-                        key={currentImageIndex}
-                        custom={direction}
-                        initial={(d) => ({ opacity: 0, x: d > 0 ? 50 : -50, filter: "blur(4px)" })}
-                        animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-                        exit={(d) => ({ opacity: 0, x: d > 0 ? -50 : 50, filter: "blur(4px)" })}
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
-                        src={selectedGallery.gallery?.[currentImageIndex] || selectedGallery.image}
-                        alt={`${selectedGallery.title} screenshot`}
-                        className="w-full h-full object-contain"
-                      />
-                    </AnimatePresence>
-                  </div>
-
-                  {/* Pagination Indicators */}
-                  {selectedGallery.gallery?.length > 1 && (
-                    <div className="absolute bottom-4 flex gap-2 z-10 bg-slate-900/50 backdrop-blur-md px-4 py-2 rounded-full border border-white/10">
-                      {selectedGallery.gallery.map((_, idx) => (
-                        <div
-                          key={idx}
-                          className={`w-2 h-2 rounded-full transition-colors ${idx === currentImageIndex ? 'bg-amber-500' : 'bg-white/50'}`}
-                        />
-                      ))}
-                    </div>
-                  )}
-                </div>
-
-              </div>
-
-              {/* Footer Tip */}
-              <p className="mt-8 text-white/50 text-sm font-medium hidden md:block">
-                Premium digital solutions crafted for excellence.
-              </p>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Modals */}
+      {activeProject && (
+        <GalleryModal
+          project={activeProject}
+          onClose={() => setActiveProject(null)}
+        />
+      )}
+      {activeWebProject && (
+        <WebImageModal
+          project={activeWebProject}
+          onClose={() => setActiveWebProject(null)}
+        />
+      )}
     </section>
   );
 }

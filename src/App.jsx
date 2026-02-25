@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Toaster } from "react-hot-toast";
+import leosLogo from "./assets/LeosGroupLogo.png";
 import Navbar from "./Navbar"; // Import the desktop Navbar component
 import MobileNavbar from "./MobileNavbar"; // Import the mobile Navbar component
 import Home from "./screens/home/Home";
@@ -71,9 +72,10 @@ function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
             {/* Brand */}
-            <div>
-              <a href="#home" className="block mb-4 text-2xl font-extrabold tracking-tight">
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400">LeosGroup</span>
+            <div className="text-center sm:text-left flex flex-col items-center sm:items-start">
+              <a href="#home" className="flex items-center gap-2 mb-4">
+                <img src={leosLogo} alt="Leos Group" className="w-10 h-10 object-contain" />
+                <span className="text-2xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400">LeosGroup</span>
               </a>
               <p className="text-slate-400 text-sm leading-relaxed">
                 Empowering businesses with cutting-edge mobile and web solutions. We turn ideas into premium digital products.
@@ -81,7 +83,7 @@ function App() {
             </div>
 
             {/* Quick Links */}
-            <div>
+            <div className="text-center sm:text-left">
               <h4 className="text-sm font-bold uppercase tracking-wider text-white mb-4">Quick Links</h4>
               <ul className="space-y-2.5">
                 <li><a href="#home" className="text-slate-400 hover:text-amber-400 transition-colors text-sm">Home</a></li>
@@ -94,7 +96,7 @@ function App() {
             </div>
 
             {/* Services */}
-            <div>
+            <div className="text-center sm:text-left">
               <h4 className="text-sm font-bold uppercase tracking-wider text-white mb-4">Services</h4>
               <ul className="space-y-2.5">
                 <li className="text-slate-400 text-sm">Mobile App Development</li>
@@ -106,12 +108,12 @@ function App() {
             </div>
 
             {/* Contact Info */}
-            <div>
+            <div className="text-center sm:text-left">
               <h4 className="text-sm font-bold uppercase tracking-wider text-white mb-4">Contact</h4>
               <ul className="space-y-2.5">
                 <li>
                   <a href="mailto:Cardo&Luna@mail.com" className="text-slate-400 hover:text-amber-400 transition-colors text-sm">
-                    Cardo&Luna@mail.com
+                    dejesusjerico528@gmail.com
                   </a>
                 </li>
                 <li className="text-slate-400 text-sm">09760143260</li>

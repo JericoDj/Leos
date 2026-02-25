@@ -46,7 +46,7 @@ function About() {
               className="glass-panel p-8 text-center flex flex-col items-center group transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-amber-500/10"
             >
               <div className="w-48 h-48 mb-6 relative">
-                <div className="absolute inset-0 bg-amber-100 rounded-full blur-2xl opacity-50 group-hover:opacity-100 transition-opacity"></div>
+                <div className="absolute inset-0 bg-orange-100 rounded-full blur-2xl opacity-50 group-hover:opacity-200 transition-opacity"></div>
                 <Player
                   autoplay
                   loop

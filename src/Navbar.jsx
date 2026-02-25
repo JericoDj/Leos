@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import leosLogo from "./assets/LeosGroupLogo.png";
 
 function Navbar() {
   const [activeSection, setActiveSection] = useState("");
@@ -41,10 +41,11 @@ function Navbar() {
       <div className="fixed w-full top-0 z-50 px-4 sm:px-6 lg:px-8 pt-4 pointer-events-none mt-3">
         <nav className="max-w-6xl mx-auto bg-white/70 backdrop-blur-xl border border-white/60 shadow-lg shadow-slate-200/50 rounded-full px-6 lg:px-8 pointer-events-auto transition-all duration-300">
           <div className="flex justify-between items-center h-16">
-            {/* Logo */}
+            {/* Logo + Text */}
             <div className="flex-shrink-0 flex items-center">
-              <a href="#home" className="text-2xl font-extrabold tracking-tight transition-transform hover:scale-105">
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-orange-500">LeosGroup</span>
+              <a href="#home" className="flex items-center gap-2 transition-transform hover:scale-105">
+                <img src={leosLogo} alt="Leos Group" className="w-8 h-8 object-contain" />
+                <span className="text-2xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-orange-500">LeosGroup</span>
               </a>
             </div>
 

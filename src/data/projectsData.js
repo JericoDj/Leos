@@ -9,6 +9,7 @@ import TaraNaPres from "../assets/mobilePresentation/TaraNa.jpg";
 import CravecoEach1 from "../assets/mobilePresentation/CraveCoEach/Simulator Screenshot - iPhone 16 Pro - 2026-02-22 at 17.22.55.png";
 import CravecoEach2 from "../assets/mobilePresentation/CraveCoEach/Simulator Screenshot - iPhone 16 Pro - 2026-02-22 at 20.39.33.png";
 import CravecoEach3 from "../assets/mobilePresentation/CraveCoEach/Simulator Screenshot - iPhone 16 Pro - 2026-02-22 at 20.39.42.png";
+import CravecoEach4 from "../assets/mobilePresentation/CraveCoEach/Simulator Screenshot - iPhone 16 Pro - 2026-02-22 at 20.40.06.png";
 
 // Mobile Gallery Images (LuminaraEach)
 import LuminaraEach1 from "../assets/mobilePresentation/LuminaraEach/photo1.png";
@@ -44,7 +45,7 @@ export const mobileProjects = [
         category: "Food Delivery App",
         image: CravecoPres,
         description: "A food delivery and discovery mobile app offering seamless ordering experiences.",
-        gallery: [CravecoEach1, CravecoEach2, CravecoEach3]
+        gallery: [CravecoEach1, CravecoEach2, CravecoEach3, CravecoEach4]
     },
     {
         id: 4,
@@ -52,7 +53,7 @@ export const mobileProjects = [
         category: "Mobile Service App",
         image: PawsRelaxPres,
         description: "Pet grooming app for booking pet grooming sessions.",
-        gallery: [PawsRelaxEach1, PawsRelaxEach2, PawsRelaxEach3]
+        gallery: [PawsRelaxEach2, PawsRelaxEach1, PawsRelaxEach3]
     },
     {
         id: 8,
@@ -60,7 +61,7 @@ export const mobileProjects = [
         category: "Taxi Booking App",
         image: TaraNaPres,
         description: "A ride-hailing and logistics mobile solution connecting local communities.",
-        gallery: [TaraNaEach1, TaraNaEach2, TaraNaEach3]
+        gallery: [TaraNaEach3, TaraNaEach1, TaraNaEach2]
     },
     {
         id: 10,
@@ -76,7 +77,8 @@ export const mobileProjects = [
         category: "Point of Sale App",
         image: POSPres,
         description: "A sleek point-of-sale mobile app designed for retail and food businesses.",
-        gallery: [POSEach1, POSEach2, POSEach3]
+        gallery: [POSEach2, POSEach1, POSEach3],
+        widescreen: true
     },
 ];
 

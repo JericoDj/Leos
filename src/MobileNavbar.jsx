@@ -1,28 +1,26 @@
 import { useState, useEffect } from "react";
-
-import { FiMenu, FiX } from "react-icons/fi"; // Adding some basic icons if possible, or just text
+import { FiMenu, FiX } from "react-icons/fi";
+import leosLogo from "./assets/LeosGroupLogo.png";
 
 function MobileNavbar() {
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(null); // Track selected menu item
+  const [selectedItem, setSelectedItem] = useState(null);
 
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
   };
 
   const openPopup = () => {
-    // Dispatch custom event to open Services modal
     window.dispatchEvent(new CustomEvent("open-services-popup"));
-    setDrawerOpen(false); // Close drawer if it was open
+    setDrawerOpen(false);
   };
 
   const handleMenuClick = (event, item) => {
     event.preventDefault();
-    setDrawerOpen(false); // Close drawer immediately
+    setDrawerOpen(false);
     window.location.href = `#${item.toLowerCase()}`;
   };
 
-  // Track scroll position to highlight the active menu item
   useEffect(() => {
     const sections = document.querySelectorAll("section");
 
@@ -40,7 +38,7 @@ function MobileNavbar() {
     };
 
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Run on initial load
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -58,9 +56,10 @@ function MobileNavbar() {
               {drawerOpen ? <FiX size={24} /> : <FiMenu size={24} />}
             </button>
 
+            {/* Logo only (no text) on mobile navbar */}
             <div className="flex-shrink-0 flex items-center justify-center">
-              <a href="#home" className="text-xl font-extrabold tracking-tight">
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-orange-500">LeosGroup</span>
+              <a href="#home">
+                <img src={leosLogo} alt="Leos Group" className="w-8 h-8 object-contain" />
               </a>
             </div>
 
@@ -84,8 +83,17 @@ function MobileNavbar() {
       <div
         className={`fixed top-0 left-0 bottom-0 w-4/5 max-w-xs bg-white/90 backdrop-blur-2xl border-r border-white/60 shadow-2xl z-50 transform transition-transform duration-300 ease-in-out flex flex-col ${drawerOpen ? 'translate-x-0' : '-translate-x-full'}`}
       >
-        <div className="px-6 pt-12 pb-6 border-b border-slate-100">
-          <p className="text-2xl font-extrabold tracking-tight mb-2">
+        {/* Drawer header: logo above text */}
+        <div className="px-6 pt-12 pb-6 border-b border-slate-100 flex flex-col items-start gap-3 relative">
+          <button
+            onClick={() => setDrawerOpen(false)}
+            className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 transition-colors text-lg leading-none"
+            aria-label="Close drawer"
+          >
+            ✕
+          </button>
+          <img src={leosLogo} alt="Leos Group" className="w-12 h-12 object-contain" />
+          <p className="text-2xl font-extrabold tracking-tight">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-orange-500">LeosGroup</span>
           </p>
           <p className="text-slate-500 text-xs leading-relaxed">Empowering Businesses,<br />One App at a Time.</p>

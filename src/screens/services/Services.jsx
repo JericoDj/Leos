@@ -42,6 +42,16 @@ function Services() {
         return () => window.removeEventListener("open-services-popup", handleOpenPopup);
     }, []);
 
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.key === "Escape" && showPopup) {
+                setShowPopup(false);
+            }
+        };
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, [showPopup]);
+
     const openPopup = () => {
         setShowPopup(true);
     };
